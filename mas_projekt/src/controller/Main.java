@@ -28,9 +28,12 @@ public class Main {
 	
 	public static void main(String[] args) {
 		DbController db= new DbController<>();
+		
+		
 		/**
 		 * przedmioty
 		 */
+		/*
 		var p1 = new Przedmiot("Modelowanie i analiza danych", "MAS", "Przedmiot prowadzony przez internet. Techniki zaawansowane w Java");
 		db.save(p1);
 		var p2 = new Przedmiot("Statystyczna analiza danych", "SAD", "Statystyka");
@@ -41,19 +44,22 @@ public class Main {
 		listaPrzedmiotow.add(p1);
 		listaPrzedmiotow.add(p2);
 		listaPrzedmiotow.add(p3);
+		*/
 		
 		/**
 		 * grupy
 		 */
+		/*
 		var g1 = new Grupa(LocalDate.parse("2020-09-01"), "1a");
-		db.save(g1);
+		
 		var g2 = new Grupa(LocalDate.parse("2019-10-01"), "1b");
 		db.save(g2);
-		
+		*/
 		
 		/**
 		 * przedmiotGrupa
 		 */
+		/*
 		var pg1 = new PrzedmiotGrupa(p1, g1, null);
 		db.save(pg1);
 		var pg2 = new PrzedmiotGrupa(p2, g1, null);
@@ -62,18 +68,26 @@ public class Main {
 		db.save(pg3);
 		var pg4 = new PrzedmiotGrupa(p1, g2, null);
 		db.save(pg4);
-
+		*/
 		
 		/**
 		 * osoby i pełnione funkcje
 		 */
+		/*
 		var o1 = new Osoba("Arek", "Arkowski", "1234", "2", "1990-01-02");
 		var u1 = new Uczen(LocalDate.parse("2020-10-01"), null, null, null);
 		
 		o1.setUczen(u1);
 		db.save(u1);
 		db.save(o1);
+		g1.add(u1);
+		db.save(g1);
+		*/
 		
+		/**
+		 * przedmioty
+		 */
+		/*
 		var o2 = new Osoba("Marek", "Markowski", "1234", "1", "1990-01-02");
 		var n1 = new KadraDydaktyczna();
 		n1.dodajPrzedmiot(pg1);
@@ -87,11 +101,12 @@ public class Main {
 		db.save(a1);
 		db.save(n1);
 		db.save(o2);
-		
+		*/
 		
 		/**
 		 * pytania
 		 */
+		/*
 		var pe1 = new PytanieEgzaminacyjne("Zaznacz poprawny wynik działania matematycznego: 2+2", p1);
 		pe1.dodajDobraOdpowiedz("4");
 		pe1.dodajZlaOdpowiedz("5");
@@ -105,16 +120,17 @@ public class Main {
 		pe2.dodajZlaOdpowiedz("7");
 		pe2.dodajZlaOdpowiedz("11");
 		db.save(pe2);
+		*/
 		
 		/**
 		 * egzamin
 		 */
-		
+		/*
 		var eg1 = new Egzamin("Kolokwium 1", List.of(pe1, pe2), 10, 10, LocalDate.parse("2020-07-07"), LocalDate.parse("2020-07-27"), p1);
 		db.save(eg1);
 		
 		System.out.println(o1);
-		
+		*/
 		
 		
 		

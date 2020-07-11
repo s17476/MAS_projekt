@@ -111,7 +111,7 @@ public class Egzamin {
 	}
 	
 	
-	@OneToMany(cascade=CascadeType.ALL)
+	@ManyToMany(cascade=CascadeType.ALL)
 	private List<PytanieEgzaminacyjne> getPytaniaEgzaminacyjne() {
 		return pytaniaEgzaminacyjne;
 	}
@@ -147,6 +147,13 @@ public class Egzamin {
 	public void usun() {}
 	
 	@Transient
-	public void pokazWyniki() {};
+	public void pokazWyniki() {}
+
+	@Override
+	public String toString() {
+		return "Egzamin [tytul=" + tytul + ", przedmiot=" + przedmiot + "]";
+	};
+	
+	
 	
 }

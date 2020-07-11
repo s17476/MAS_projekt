@@ -148,6 +148,9 @@ public class MainWindow extends JFrame {
 		panel_3.add(uczen, "Uczen");
 		uczen.setLayout(new MigLayout("", "[grow][][][][][grow]", "[grow][][][][grow][grow]"));
 		
+		JLabel lblNewLabel_3 = new JLabel("Dostępne testy:");
+		uczen.add(lblNewLabel_3, "cell 0 0");
+		
 		JLabel lblNewLabel_4 = new JLabel("uczen");
 		uczen.add(lblNewLabel_4, "cell 1 2");
 		
