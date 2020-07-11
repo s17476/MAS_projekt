@@ -9,11 +9,17 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controller.DbController;
+import model.Egzamin;
 import model.Osoba;
+import model.PrzedmiotGrupa;
+import model.PytanieEgzaminacyjne;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
@@ -33,6 +39,9 @@ import javax.swing.border.LineBorder;
 import javax.swing.JSeparator;
 import javax.swing.UIManager;
 import javax.swing.border.SoftBevelBorder;
+
+import org.hibernate.query.Query;
+
 import javax.swing.border.BevelBorder;
 
 public class MainWindow extends JFrame {
@@ -106,7 +115,7 @@ public class MainWindow extends JFrame {
 		if(osoba.getUczen() != null)
 			list.add(osoba.getUczen());
 		
-		if (list.size() == 2) list.remove(0);
+		//if (list.size() == 2) list.remove(0);
 		
 		JPanel panel_7 = new JPanel();
 		contentPane.add(panel_7, "cell 5 0");
@@ -149,10 +158,38 @@ public class MainWindow extends JFrame {
 		uczen.setLayout(new MigLayout("", "[grow][][][][][grow]", "[grow][][][][grow][grow]"));
 		
 		JLabel lblNewLabel_3 = new JLabel("Dostępne testy:");
-		uczen.add(lblNewLabel_3, "cell 0 0");
+		uczen.add(lblNewLabel_3, "flowx,cell 0 0");
 		
 		JLabel lblNewLabel_4 = new JLabel("uczen");
 		uczen.add(lblNewLabel_4, "cell 1 2");
+		
+		
+		/**
+		 * pobiera dostępne Egzaminy
+		 */
+		if(osoba.getUczen() != null) {
+		
+		
+			CriteriaBuilder cb = db.getCriteriaBuilder();
+			CriteriaQuery<PrzedmiotGrupa> cr = cb.createQuery(PrzedmiotGrupa.class);
+			Root<PrzedmiotGrupa> root = cr.from(PrzedmiotGrupa.class);
+			
+			cr.select(root).where(cb.equal(root.get("grupa"), osoba.getUczen().getGrupa()));
+			System.out.println("Grupa"+osoba.getUczen().getGrupa());
+			 
+			Query<PrzedmiotGrupa> query = db.createQuery(cr);
+			List<PrzedmiotGrupa> results = (List<PrzedmiotGrupa>)query.getResultList();
+			
+			
+			
+			JComboBox comboBox_1 = new JComboBox(results.get(0).getListaEgzaminow().toArray());////////////////////////////////////////tu testy
+			uczen.add(comboBox_1, "cell 0 0");
+			System.out.println("Jest grupa "+results);
+		}
+		
+		
+		JButton btnNewButton_8 = new JButton("Rozwiąż");
+		uczen.add(btnNewButton_8, "cell 0 0");
 		
 		JPanel nauczyciel = new JPanel();
 		nauczyciel.setBorder(null);

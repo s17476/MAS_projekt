@@ -63,7 +63,7 @@ public class Uczen {
 
 
 	@ManyToOne(cascade=CascadeType.ALL)
-	private Grupa getGrupa() {
+	public Grupa getGrupa() {
 		return grupa;
 	}
 

@@ -279,6 +279,7 @@ public class Selection extends JFrame {
 							}
 							Egzamin egzamin = new Egzamin(txtPrzykad.getText(), pe, 10, Integer.parseInt(textField_1.getText()), 
 															LocalDate.parse(textField_2.getText()), LocalDate.parse(textField_3.getText()), pg.getPrzedmiot());
+							pg.dodajEgzamin(egzamin);
 							db.save(egzamin);
 							System.out.println(egzamin);
 							frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));

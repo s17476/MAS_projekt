@@ -45,6 +45,10 @@ public class PrzedmiotGrupa {
 		this.id = id;
 	}
 	
+	@Transient
+	public void dodajEgzamin(Egzamin egzamin) {
+		listaEgzaminow.add(egzamin);
+	}
 	@ManyToOne
 	public Przedmiot getPrzedmiot() {
 		return przedmiot;
@@ -71,7 +75,7 @@ public class PrzedmiotGrupa {
 		this.dydaktyk = dudaktyk;
 	}
 	@ManyToMany(cascade=CascadeType.ALL)
-	private List<Egzamin> getListaEgzaminow() {
+	public List<Egzamin> getListaEgzaminow() {
 		return listaEgzaminow;
 	}
 

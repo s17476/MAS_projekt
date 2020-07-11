@@ -151,7 +151,7 @@ public class Egzamin {
 
 	@Override
 	public String toString() {
-		return "Egzamin [tytul=" + tytul + ", przedmiot=" + przedmiot + "]";
+		return "Egzamin " + tytul + " z przedmiotu - " + przedmiot;
 	};
 	
 	
