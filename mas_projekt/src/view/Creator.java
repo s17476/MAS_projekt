@@ -56,6 +56,7 @@ public class Creator extends JFrame {
 		List<PrzedmiotGrupa> przedmiotyWGrupach = (List<PrzedmiotGrupa>)db.load("PrzedmiotGrupa");
 		List<Przedmiot> przedmioty = new ArrayList();
 		przedmiotyWGrupach.stream().forEach(x -> {
+			
 			if(!przedmioty.contains(x.getPrzedmiot()))
 				przedmioty.add(x.getPrzedmiot());
 		});
@@ -150,7 +151,12 @@ public class Creator extends JFrame {
 		pack();
 		setLocationRelativeTo(null);
 		setVisible(true);
-
+		addWindowListener(new java.awt.event.WindowAdapter() {
+		    @Override
+		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+		    	parent.setEnabled(true);
+		    }
+		});
 	}
 
 }

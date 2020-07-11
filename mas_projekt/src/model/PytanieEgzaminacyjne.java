@@ -73,7 +73,7 @@ public class PytanieEgzaminacyjne {
 	}
 	
 	@ElementCollection(targetClass = String.class)
-	private List<String> getZleOdpowiedzi() {
+	public List<String> getZleOdpowiedzi() {
 		return zleOdpowiedzi;
 	}
 
@@ -82,7 +82,7 @@ public class PytanieEgzaminacyjne {
 	}
 	
 	@ElementCollection(targetClass = String.class)
-	private List<String> getDobreOdpowiedzi() {
+	public List<String> getDobreOdpowiedzi() {
 		return dobreOdpowiedzi;
 	}
 
@@ -98,4 +98,11 @@ public class PytanieEgzaminacyjne {
 	public void setPrzedmiot(Przedmiot przedmiot) {
 		this.przedmiot = przedmiot;
 	}
+
+	@Override
+	public String toString() {
+		return "" +trescPytania;
+	}
+	
+	
 }

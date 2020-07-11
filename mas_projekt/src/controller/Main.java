@@ -100,10 +100,10 @@ public class Main {
 		db.save(pe1);
 		
 		var pe2 = new PytanieEgzaminacyjne("Zaznacz poprawny wynik działania matematycznego: 1+1", p1);
-		pe1.dodajDobraOdpowiedz("2");
-		pe1.dodajZlaOdpowiedz("5");
-		pe1.dodajZlaOdpowiedz("7");
-		pe1.dodajZlaOdpowiedz("11");
+		pe2.dodajDobraOdpowiedz("2");
+		pe2.dodajZlaOdpowiedz("5");
+		pe2.dodajZlaOdpowiedz("7");
+		pe2.dodajZlaOdpowiedz("11");
 		db.save(pe2);
 		
 		/**
