@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -27,11 +28,10 @@ public class Grupa {
 	public Grupa() {
 	}
 
-	public Grupa(LocalDate rokSzkolny, String numerGrupy, List<Uczen> listaUcznow) {
+	public Grupa(LocalDate rokSzkolny, String numerGrupy) {
 		super();
 		this.rokSzkolny = rokSzkolny;
 		this.numerGrupy = numerGrupy;
-		this.listaUcznow = listaUcznow;
 	}
 	
 	@Id
@@ -42,7 +42,10 @@ public class Grupa {
 		return id;
 	}
 
-
+	@Transient
+	public void add(Uczen uczen) {
+		listaUcznow.add(uczen);
+	}
 
 	private void setId(long id) {
 		this.id = id;

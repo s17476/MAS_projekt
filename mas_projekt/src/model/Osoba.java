@@ -17,6 +17,9 @@ public class Osoba {
 	private LocalDate dataZatrudnienia;
 	private LocalDate dataRozwiazaniaUmowyOprace;
 	
+	private Uczen uczen;
+	
+
 	private KadraAdministracyjna administrator;
 	private KadraDydaktyczna dydaktyk;
 	
@@ -33,6 +36,16 @@ public class Osoba {
 		this.dataUrodzenia = LocalDate.parse(dataUrodzenia);
 	}
 
+	@OneToOne
+	public Uczen getUczen() {
+		return uczen;
+	}
+
+
+
+	public void setUczen(Uczen uczen) {
+		this.uczen = uczen;
+	}
 	
 	@Basic
 	private String getPassword() {
@@ -48,89 +61,89 @@ public class Osoba {
 
 
 	@Basic
-	private String getImie() {
+	public String getImie() {
 		return imie;
 	}
 	
-	private void setImie(String imie) {
+	public void setImie(String imie) {
 		this.imie = imie;
 	}
 	@Basic
-	private String getNazwisko() {
+	public String getNazwisko() {
 		return nazwisko;
 	}
 
-	private void setNazwisko(String nazwisko) {
+	public void setNazwisko(String nazwisko) {
 		this.nazwisko = nazwisko;
 	}
 	@Id
-	private String getPesel() {
+	public String getPesel() {
 		return pesel;
 	}
 
-	private void setPesel(String pesel) {
+	public void setPesel(String pesel) {
 		this.pesel = pesel;
 	}
 	@Basic
-	private LocalDate getDataUrodzenia() {
+	public LocalDate getDataUrodzenia() {
 		return dataUrodzenia;
 	}
 	
-	private void setDataUrodzenia(LocalDate dataUrodzenia) {
+	public void setDataUrodzenia(LocalDate dataUrodzenia) {
 		this.dataUrodzenia = dataUrodzenia;
 	}
 	@Basic
-	private String getNrKontaBankowego() {
+	public String getNrKontaBankowego() {
 		return nrKontaBankowego;
 	}
 
-	private void setNrKontaBankowego(String nrKontaBankowego) {
+	public void setNrKontaBankowego(String nrKontaBankowego) {
 		this.nrKontaBankowego = nrKontaBankowego;
 	}
 	@OneToOne
-	private Adres getAdres() {
+	public Adres getAdres() {
 		return adres;
 	}
 
-	private void setAdres(Adres adres) {
+	public void setAdres(Adres adres) {
 		this.adres = adres;
 	}
 	@Basic
-	private LocalDate getDataZatrudnienia() {
+	public LocalDate getDataZatrudnienia() {
 		return dataZatrudnienia;
 	}
 
-	private void setDataZatrudnienia(LocalDate dataZatrudnienia) {
+	public void setDataZatrudnienia(LocalDate dataZatrudnienia) {
 		this.dataZatrudnienia = dataZatrudnienia;
 	}
 	@Basic
-	private LocalDate getDataRozwiazaniaUmowyOprace() {
+	public LocalDate getDataRozwiazaniaUmowyOprace() {
 		return dataRozwiazaniaUmowyOprace;
 	}
 
-	private void setDataRozwiazaniaUmowyOprace(LocalDate dataRozwiazaniaUmowyOprace) {
+	public void setDataRozwiazaniaUmowyOprace(LocalDate dataRozwiazaniaUmowyOprace) {
 		this.dataRozwiazaniaUmowyOprace = dataRozwiazaniaUmowyOprace;
 	}
 	@OneToOne
-	private KadraAdministracyjna getAdministrator() {
+	public KadraAdministracyjna getAdministrator() {
 		return administrator;
 	}
 
-	private void setAdministrator(KadraAdministracyjna administrator) {
+	public void setAdministrator(KadraAdministracyjna administrator) {
 		this.administrator = administrator;
 	}
 	@OneToOne
-	private KadraDydaktyczna getDydaktyk() {
+	public KadraDydaktyczna getDydaktyk() {
 		return dydaktyk;
 	}
 
-	private void setDydaktyk(KadraDydaktyczna dydaktyk) {
+	public void setDydaktyk(KadraDydaktyczna dydaktyk) {
 		this.dydaktyk = dydaktyk;
 	}
 	
 	@Override
 	public String toString() {
-		return this.imie+" "+this.nazwisko;
+		return this.imie+" "+this.nazwisko+" "+this.pesel+" "+this.password;
 	}
 	
 	

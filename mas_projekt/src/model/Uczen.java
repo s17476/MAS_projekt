@@ -114,4 +114,11 @@ public class Uczen {
 	public void kontakt(Osoba osoba) {
 		
 	}
+	
+	@Transient
+	@Override
+	public String toString() {
+		return "Uczen";
+	}
+	
 }

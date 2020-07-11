@@ -21,9 +21,8 @@ public class KadraDydaktyczna {
 
 
 
-	public KadraDydaktyczna(long id, List<PrzedmiotGrupa> listaPrzedmiotów) {
+	public KadraDydaktyczna(List<PrzedmiotGrupa> listaPrzedmiotów) {
 		super();
-		this.id = id;
 		this.listaPrzedmiotów = listaPrzedmiotów;
 	}
 
@@ -58,6 +57,13 @@ public class KadraDydaktyczna {
 	}
 
 	public void sprawdzWyniki() {}
+
+
+	@Transient
+	@Override
+	public String toString() {
+		return "Dydaktyk";
+	}
 	
 	
 }

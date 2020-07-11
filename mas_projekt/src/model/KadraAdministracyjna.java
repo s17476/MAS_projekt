@@ -68,4 +68,11 @@ public class KadraAdministracyjna {
 	private String getZakresObowiazkow() {
 		return zakresObowiazkow;
 	}
+
+	@Override
+	public String toString() {
+		return "Administrator";
+	}
+	
+	
 }
