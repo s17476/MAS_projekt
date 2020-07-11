@@ -27,6 +27,7 @@ import javax.swing.JComboBox;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.border.LineBorder;
 import javax.swing.JSeparator;
@@ -88,7 +89,12 @@ public class MainWindow extends JFrame {
 		JButton btnNewButton_2 = new JButton("Moje pliki");
 		panel.add(btnNewButton_2);
 		
-		JButton btnNewButton_3 = new JButton("Moje przedmioty");
+		JButton btnNewButton_3 = new JButton("Zamknij");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+			}
+		});
 		panel.add(btnNewButton_3);
 		
 		List list = new ArrayList<>();
