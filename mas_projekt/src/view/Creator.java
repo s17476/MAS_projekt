@@ -34,7 +34,7 @@ public class Creator extends JFrame {
 		    @Override
 		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
 		    	parent.setEnabled(true);
-				System.out.println("zamykamy");
+				System.out.println("zamykamy kreatora");
 		    }
 		});
 	}

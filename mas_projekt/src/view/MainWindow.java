@@ -148,7 +148,46 @@ public class MainWindow extends JFrame {
 		JPanel nauczyciel = new JPanel();
 		nauczyciel.setBorder(null);
 		panel_3.add(nauczyciel, "KadraDydaktyczna");
-		nauczyciel.setLayout(new MigLayout("", "[101px][grow]", "[grow]"));
+		nauczyciel.setLayout(new MigLayout("", "[][grow]", "[grow]"));
+		
+		JPanel panel_1 = new JPanel();
+		nauczyciel.add(panel_1, "cell 0 0,grow");
+		panel_1.setLayout(new MigLayout("", "[89px]", "[23px][][][][]"));
+		
+		JButton btnNewButton_4 = new JButton("Pokaż grupy");
+		panel_1.add(btnNewButton_4, "cell 0 0,growx,aligny top");
+		
+		JButton btnNewButton_5 = new JButton("Pokaż przedmioty");
+		panel_1.add(btnNewButton_5, "cell 0 1,growx");
+		
+		JSeparator separator = new JSeparator();
+		panel_1.add(separator, "cell 0 2,grow");
+		
+		
+		/**
+		 * kreator nowego testu
+		 */
+		JButton btnNewButton_6 = new JButton("Nowy test");
+		btnNewButton_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.setEnabled(false);
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							new Creator("Utwórz nowy test", db, frame);
+						} catch (Exception e) {
+							e.printStackTrace();
+							
+						}
+					}
+				});
+			}
+		});
+		panel_1.add(btnNewButton_6, "cell 0 3,growx");
+		
+		JButton btnNewButton_7 = new JButton("Pokaż testy");
+		panel_1.add(btnNewButton_7, "cell 0 4,growx");
+		
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
