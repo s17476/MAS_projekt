@@ -133,19 +133,24 @@ public class Creator extends JFrame {
 					.filter(x -> x.getGrupa().equals((Grupa)comboGrupa.getSelectedItem()))
 					.toArray()[0];
 				System.out.println(pg);
+				frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							new Selection("Wybierz pytania", frame, db, pg);
+							
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
 			}
 		});
 		panel.add(btnNewButton_1);
 		pack();
 		setLocationRelativeTo(null);
 		setVisible(true);
-		addWindowListener(new java.awt.event.WindowAdapter() {
-		    @Override
-		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-		    	parent.setEnabled(true);
-				System.out.println("zamykamy kreatora");
-		    }
-		});
+
 	}
 
 }

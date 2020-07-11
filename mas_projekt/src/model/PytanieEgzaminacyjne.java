@@ -11,6 +11,7 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
@@ -24,15 +25,19 @@ public class PytanieEgzaminacyjne {
 	public String trescPytania;
 	public List<String> zleOdpowiedzi = new ArrayList<>();
 	public List<String> dobreOdpowiedzi = new ArrayList<>();
+	public Przedmiot przedmiot;
 	
 	
 	
+	
+
 	public PytanieEgzaminacyjne() {
 	}
 
-	public PytanieEgzaminacyjne(String trescPytania) {
+	public PytanieEgzaminacyjne(String trescPytania, Przedmiot przedmiot) {
 		super();
 		this.trescPytania = trescPytania;
+		this.przedmiot = przedmiot;
 	}
 	
 	@Id
@@ -85,5 +90,12 @@ public class PytanieEgzaminacyjne {
 		this.dobreOdpowiedzi = dobreOdpowiedzi;
 	}
 	
-	
+	@ManyToOne(cascade=CascadeType.ALL)
+	public Przedmiot getPrzedmiot() {
+		return przedmiot;
+	}
+
+	public void setPrzedmiot(Przedmiot przedmiot) {
+		this.przedmiot = przedmiot;
+	}
 }

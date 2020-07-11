@@ -92,14 +92,14 @@ public class Main {
 		/**
 		 * pytania
 		 */
-		var pe1 = new PytanieEgzaminacyjne("Zaznacz poprawny wynik działania matematycznego: 2+2");
+		var pe1 = new PytanieEgzaminacyjne("Zaznacz poprawny wynik działania matematycznego: 2+2", p1);
 		pe1.dodajDobraOdpowiedz("4");
 		pe1.dodajZlaOdpowiedz("5");
 		pe1.dodajZlaOdpowiedz("7");
 		pe1.dodajZlaOdpowiedz("22");
 		db.save(pe1);
 		
-		var pe2 = new PytanieEgzaminacyjne("Zaznacz poprawny wynik działania matematycznego: 1+1");
+		var pe2 = new PytanieEgzaminacyjne("Zaznacz poprawny wynik działania matematycznego: 1+1", p1);
 		pe1.dodajDobraOdpowiedz("2");
 		pe1.dodajZlaOdpowiedz("5");
 		pe1.dodajZlaOdpowiedz("7");
@@ -110,7 +110,7 @@ public class Main {
 		 * egzamin
 		 */
 		
-		var eg1 = new Egzamin("Kolokwium 1", List.of(pe1, pe2), 10, 10, LocalDate.parse("2020-07-07"), LocalDate.parse("2020-07-27"));
+		var eg1 = new Egzamin("Kolokwium 1", List.of(pe1, pe2), 10, 10, LocalDate.parse("2020-07-07"), LocalDate.parse("2020-07-27"), p1);
 		db.save(eg1);
 		
 		System.out.println(o1);

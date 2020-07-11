@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
@@ -27,14 +28,14 @@ public class Egzamin {
 	public LocalDate dostepnyOd;
 	public LocalDate dostepnyDo;
 	public Ocena ocena;
-	
+	public Przedmiot przedmiot;
 	
 
 	public Egzamin() {
 	}
 
 	public Egzamin(String tytul, List<PytanieEgzaminacyjne> pytaniaEgzaminacyjne, int iloscPunktow, int dostepnyCzas,
-			LocalDate dostepnyOd, LocalDate dostepnyDo) {
+			LocalDate dostepnyOd, LocalDate dostepnyDo, Przedmiot przedmiot) {
 		super();
 		this.tytul = tytul;
 		this.pytaniaEgzaminacyjne = pytaniaEgzaminacyjne;
@@ -42,6 +43,7 @@ public class Egzamin {
 		this.dostepnyCzas = dostepnyCzas;
 		this.dostepnyOd = dostepnyOd;
 		this.dostepnyDo = dostepnyDo;
+		this.przedmiot = przedmiot;
 	}
 
 	@Id
@@ -52,12 +54,21 @@ public class Egzamin {
 		return id;
 	}
 
-
+	
 
 	private void setId(long id) {
 		this.id = id;
 	}
 	
+	@ManyToOne(cascade=CascadeType.ALL)
+	public Przedmiot getPrzedmiot() {
+		return przedmiot;
+	}
+
+	public void setPrzedmiot(Przedmiot przedmiot) {
+		this.przedmiot = przedmiot;
+	}
+
 	@Basic
 	private String getTytul() {
 		return tytul;
