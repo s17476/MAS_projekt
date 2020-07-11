@@ -12,12 +12,14 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
+import model.Egzamin;
 import model.Grupa;
 import model.KadraAdministracyjna;
 import model.KadraDydaktyczna;
 import model.Osoba;
 import model.Przedmiot;
 import model.PrzedmiotGrupa;
+import model.PytanieEgzaminacyjne;
 import model.Uczen;
 import view.LogIn;
 import view.MainWindow;
@@ -60,11 +62,7 @@ public class Main {
 		db.save(pg3);
 		var pg4 = new PrzedmiotGrupa(p1, g2, null);
 		db.save(pg4);
-		List<PrzedmiotGrupa> listaPrzedmiotowGrup = new ArrayList<>();
-		listaPrzedmiotowGrup.add(pg1);
-		listaPrzedmiotowGrup.add(pg2);
-		listaPrzedmiotowGrup.add(pg3);
-		listaPrzedmiotowGrup.add(pg4);
+
 		
 		/**
 		 * osoby i pełnione funkcje
@@ -77,7 +75,12 @@ public class Main {
 		db.save(o1);
 		
 		var o2 = new Osoba("Marek", "Markowski", "1234", "1", "1990-01-02");
-		var n1 = new KadraDydaktyczna(listaPrzedmiotowGrup);
+		var n1 = new KadraDydaktyczna();
+		n1.dodajPrzedmiot(pg1);
+		n1.dodajPrzedmiot(pg2);
+		n1.dodajPrzedmiot(pg3);
+		n1.dodajPrzedmiot(pg4);
+		
 		var a1 = new KadraAdministracyjna("Dziekan", "Przykładowy opis");
 		o2.setAdministrator(a1);;
 		o2.setDydaktyk(n1);
@@ -86,6 +89,29 @@ public class Main {
 		db.save(o2);
 		
 		
+		/**
+		 * pytania
+		 */
+		var pe1 = new PytanieEgzaminacyjne("Zaznacz poprawny wynik działania matematycznego: 2+2");
+		pe1.dodajDobraOdpowiedz("4");
+		pe1.dodajZlaOdpowiedz("5");
+		pe1.dodajZlaOdpowiedz("7");
+		pe1.dodajZlaOdpowiedz("22");
+		db.save(pe1);
+		
+		var pe2 = new PytanieEgzaminacyjne("Zaznacz poprawny wynik działania matematycznego: 1+1");
+		pe1.dodajDobraOdpowiedz("2");
+		pe1.dodajZlaOdpowiedz("5");
+		pe1.dodajZlaOdpowiedz("7");
+		pe1.dodajZlaOdpowiedz("11");
+		db.save(pe2);
+		
+		/**
+		 * egzamin
+		 */
+		
+		var eg1 = new Egzamin("Kolokwium 1", List.of(pe1, pe2), 10, 10, LocalDate.parse("2020-07-07"), LocalDate.parse("2020-07-27"));
+		db.save(eg1);
 		
 		System.out.println(o1);
 		

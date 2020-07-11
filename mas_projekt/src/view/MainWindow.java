@@ -213,7 +213,7 @@ public class MainWindow extends JFrame {
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		panel_5.add(lblNewLabel_2);
 		this.setMinimumSize(new Dimension(300, 400));
-		pack();
+		setPreferredSize(new Dimension(1000, 700));
 		setLocationRelativeTo(null);
 		setVisible(true);
 		addWindowListener(new java.awt.event.WindowAdapter() {

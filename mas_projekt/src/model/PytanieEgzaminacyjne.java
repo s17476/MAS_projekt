@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -43,6 +44,15 @@ public class PytanieEgzaminacyjne {
 	}
 
 
+	@Transient
+	public void dodajZlaOdpowiedz(String s) {
+		zleOdpowiedzi.add(s);
+	}
+	
+	@Transient
+	public void dodajDobraOdpowiedz(String s) {
+		dobreOdpowiedzi.add(s);
+	}
 
 	private void setId(long id) {
 		this.id = id;

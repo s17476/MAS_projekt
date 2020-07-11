@@ -42,8 +42,9 @@ public class KadraDydaktyczna {
 		this.id = id;
 	}
 	@Transient
-	private void dodajPrzedmiot(PrzedmiotGrupa przedmiot) {
+	public void dodajPrzedmiot(PrzedmiotGrupa przedmiot) {
 		listaPrzedmiotów.add(przedmiot);
+		przedmiot.setDydaktyk(this);
 	}
 	
 	@ManyToMany(cascade=CascadeType.ALL)

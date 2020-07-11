@@ -76,6 +76,11 @@ public class Grupa {
 	private void setListaUcznow(List<Uczen> listaUcznow) {
 		this.listaUcznow = listaUcznow;
 	}
+
+	@Override
+	public String toString() {
+		return "["+numerGrupy+"]";
+	}
 	
 	
 }

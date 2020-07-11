@@ -72,7 +72,8 @@ public class DbController<E> {
 	public List<E> load(String s){
 		session.beginTransaction();
 		//List<Osoba> o2 = (List<Osoba>) session.createQuery("from Osoba").list();
-		List<E> tmpList = session.createQuery(s).list();
+		List<E> tmpList = session.createQuery("from "+s).list();
+		session.getTransaction().commit();
 		return tmpList;
 		
 	}

@@ -46,7 +46,7 @@ public class PrzedmiotGrupa {
 	}
 	
 	@ManyToOne
-	private Przedmiot getPrzedmiot() {
+	public Przedmiot getPrzedmiot() {
 		return przedmiot;
 	}
 
@@ -55,7 +55,7 @@ public class PrzedmiotGrupa {
 		this.przedmiot = przedmiot;
 	}
 	@ManyToOne(cascade=CascadeType.ALL)
-	private Grupa getGrupa() {
+	public Grupa getGrupa() {
 		return grupa;
 	}
 
@@ -67,7 +67,7 @@ public class PrzedmiotGrupa {
 		return dydaktyk;
 	}
 
-	private void setDydaktyk(KadraDydaktyczna dudaktyk) {
+	public void setDydaktyk(KadraDydaktyczna dudaktyk) {
 		this.dydaktyk = dudaktyk;
 	}
 	@ManyToMany(cascade=CascadeType.ALL)
@@ -86,6 +86,12 @@ public class PrzedmiotGrupa {
 	private void setListaZadanDomowych(List<ZadanieDomowe> listaZadanDomowych) {
 		this.listaZadanDomowych = listaZadanDomowych;
 	}
+
+	@Override
+	public String toString() {
+		return "PrzedmiotGrupa [przedmiot=" + przedmiot + ", grupa=" + grupa;
+	}
+	
 	
 	
 }

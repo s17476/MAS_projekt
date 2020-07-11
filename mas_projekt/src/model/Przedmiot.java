@@ -68,6 +68,13 @@ public class Przedmiot {
 	private void setOpis(String opis) {
 		this.opis = opis;
 	}
+
+	@Override
+	public String toString() {
+		return "["+symbol+"]"+nazwaPrzedmiotu;
+	}
+	
+	
 	
 	
 }
