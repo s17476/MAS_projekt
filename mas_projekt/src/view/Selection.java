@@ -129,7 +129,6 @@ public class Selection extends JFrame {
 		Query<PytanieEgzaminacyjne> query = db.createQuery(cr);
 		List<PytanieEgzaminacyjne> results = (List<PytanieEgzaminacyjne>)query.getResultList();
 		
-		System.out.println(results);
 		JLabel lblNewLabel_4 = new JLabel();
 		lblNewLabel_4.setHorizontalAlignment(SwingConstants.LEFT);
 		JLabel lblNewLabel_6 = new JLabel("");
@@ -158,7 +157,6 @@ public class Selection extends JFrame {
 					}
 					odpowiedzi+="</pre></html>";
 					lblNewLabel_6.setText(odpowiedzi);
-					System.out.println(odpowiedzi);
 				}catch(Exception exc) {}
 			}
 		});
@@ -241,7 +239,6 @@ public class Selection extends JFrame {
 															LocalDate.parse(textField_2.getText()), LocalDate.parse(textField_3.getText()), pg.getPrzedmiot());
 							pg.dodajEgzamin(egzamin);
 							db.save(egzamin);
-							System.out.println(egzamin);
 							frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 						}catch(Exception exc) {
 							exc.printStackTrace();
