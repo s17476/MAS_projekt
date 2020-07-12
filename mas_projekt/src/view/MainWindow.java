@@ -50,6 +50,8 @@ public class MainWindow extends JFrame {
 	private Osoba osoba;
 	public DbController db;
 	public JFrame frame = this;
+	public Egzamin egzamin;
+	public final JComboBox<Egzamin> comboBox_1;
 
 
 
@@ -160,8 +162,14 @@ public class MainWindow extends JFrame {
 		JLabel lblNewLabel_3 = new JLabel("Dostępne testy:");
 		uczen.add(lblNewLabel_3, "flowx,cell 0 0");
 		
-		JLabel lblNewLabel_4 = new JLabel("uczen");
+		JLabel lblNewLabel_4 = new JLabel("Moduł uczeń");
+		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		uczen.add(lblNewLabel_4, "cell 1 2");
+		
+		
+		
+
+		
 		
 		
 		/**
@@ -182,13 +190,36 @@ public class MainWindow extends JFrame {
 			
 			
 			
-			JComboBox comboBox_1 = new JComboBox(results.get(0).getListaEgzaminow().toArray());////////////////////////////////////////tu testy
+			comboBox_1 = new JComboBox(results.get(0).getListaEgzaminow().toArray());////////////////////////////////////////tu testy
 			uczen.add(comboBox_1, "cell 0 0");
+			
 			System.out.println("Jest grupa "+results);
 		}
+		else
+			comboBox_1 = new  JComboBox();
 		
-		
+		/**
+		 * uczeń - rozwiąż egzamin///////////////////////////////////////////////////////////////////////
+		 */
 		JButton btnNewButton_8 = new JButton("Rozwiąż");
+		btnNewButton_8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.setEnabled(false);
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							new EgzaminView("Egzamin", db, (Egzamin)comboBox_1.getSelectedItem(), frame);
+						
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+				
+			}
+		});
+		
+		
 		uczen.add(btnNewButton_8, "cell 0 0");
 		
 		JPanel nauczyciel = new JPanel();

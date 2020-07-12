@@ -82,13 +82,13 @@ public class Selection extends JFrame {
 		((MainWindow)p.parent).setEnabled(false);
 		
 		
-		setPreferredSize(new Dimension(1000, 400));
+		setPreferredSize(new Dimension(1000, 450));
 		setResizable(false);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[415px][128px][419px,grow]", "[14px][14px][183px][14px][10px][][14px][78px,grow]"));
+		contentPane.setLayout(new MigLayout("", "[300px:n:300px][128px][300px:n:300px,grow]", "[14px][14px][183px][14px][10px][][14px][78px,grow]"));
 		
 		JLabel lblNewLabel = new JLabel("Pytania z przedmiotu :" + pg.getPrzedmiot());
 		contentPane.add(lblNewLabel, "cell 1 0,alignx center,aligny top");
@@ -168,7 +168,7 @@ public class Selection extends JFrame {
 		list.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				try {
-					String s = listModel.get(list.getSelectedIndex()).toString();
+					String s = listModel.get(list.getSelectedIndex()).getTrescPytania();
 					lblNewLabel_4.setText(s);
 					
 				}catch(Exception exc) {}

@@ -64,7 +64,7 @@ public class PytanieEgzaminacyjne {
 	}
 	
 	@Basic
-	private String getTrescPytania() {
+	public String getTrescPytania() {
 		return trescPytania;
 	}
 
@@ -101,6 +101,8 @@ public class PytanieEgzaminacyjne {
 
 	@Override
 	public String toString() {
+		if(trescPytania.length() > 40)
+			return trescPytania.substring(0, 37) + "...";
 		return "" +trescPytania;
 	}
 	
