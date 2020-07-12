@@ -50,7 +50,7 @@ public class Pytanie extends JFrame {
 		this.parent = parent;
 		this.listModel = listModel;
 		this.przedmiot = przedmiot;
-		setPreferredSize(new Dimension(500, 250));
+		setPreferredSize(new Dimension(500, 200));
 		setResizable(false);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
