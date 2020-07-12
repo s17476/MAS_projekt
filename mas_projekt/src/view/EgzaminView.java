@@ -5,8 +5,15 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.TimeZone;
 
 import javax.swing.JFrame;
@@ -15,18 +22,30 @@ import javax.swing.border.EmptyBorder;
 
 import controller.DbController;
 import model.Egzamin;
+import model.Ocena;
+import model.Osoba;
+import model.PytanieEgzaminacyjne;
+import model.Uczen;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
 import javax.swing.Timer;
 import javax.swing.JButton;
 import java.awt.Color;
+import java.awt.Font;
+import javax.swing.JCheckBox;
+import javax.swing.border.LineBorder;
 
 public class EgzaminView extends JFrame {
+	JFrame frame  =this;
 	private JFrame parent;
 	private JPanel contentPane;
 	private Egzamin egzamin;
 	private DbController db;
+	public PytanieEgzaminacyjne pe;
+	public Osoba osoba;
 
 	/**
 	 * Launch the application.
@@ -36,11 +55,12 @@ public class EgzaminView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public EgzaminView(String name, DbController db, Egzamin egzamin, JFrame parent) {
+	public EgzaminView(String name, DbController db, Egzamin egzamin, JFrame parent, Osoba osoba) {
 		super(name);
 		this.parent = parent;
 		this.egzamin = egzamin;
 		this.db = db;
+		this.osoba = osoba;
 		setBounds(100, 100, 1153, 694);
 		setPreferredSize(new Dimension(1200, 700));
 		contentPane = new JPanel();
@@ -50,19 +70,139 @@ public class EgzaminView extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new MigLayout("", "[][grow][grow][]", "[][][grow][]"));
 		
-		JLabel lblNewLabel = new JLabel(egzamin.toString());
-		contentPane.add(lblNewLabel, "cell 0 0");
 		
+		
+		///////////
+		JLabel lblNewLabel = new JLabel(egzamin.toString());
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		contentPane.add(lblNewLabel, "cell 0 0");
+			
 		JLabel lblNewLabel_2 = new JLabel("Czas pozostały do końca egzaminu:");
 		contentPane.add(lblNewLabel_2, "flowx,cell 2 1,alignx right");
-		
+			
 		JLabel lblNewLabel_1 = new JLabel("00:00");
 		contentPane.add(lblNewLabel_1, "cell 2 1,alignx right");
-		
+			
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, "cell 0 2 4 1,grow");
+			
+		JPanel panel = new JPanel();
 		
+		scrollPane.setViewportView(panel);
+		panel.setLayout(new MigLayout("", "[grow]", "[][][][][][][][][][]"));
+			
+		
+		Map<PytanieEgzaminacyjne, Map<String, JCheckBox>> test = new HashMap<>();
+			
+		for (int i = 0; i < egzamin.getPytaniaEgzaminacyjne().size(); i++) {
+			
+			pe = egzamin.getPytaniaEgzaminacyjne().get(i);
+			
+			Map<String, JCheckBox> check = new HashMap<>();
+			
+			
+			
+			JPanel panel_1 = new JPanel();
+			panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
+			
+			JSeparator separator = new JSeparator();
+			
+			
+			
+			panel.add(panel_1, "cell 0 "+i+",grow");
+			panel_1.setLayout(new MigLayout("", "[][grow][center]", "[][][][][]"));
+			
+			JLabel lblNewLabel_3 = new JLabel(pe.getTrescPytania());
+			lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			panel_1.add(lblNewLabel_3, "cell 1 0");
+			panel_1.add(separator, "cell 1 1,grow");
+			
+			List<String> odpowiedzi = new ArrayList<>(); 
+			pe.getDobreOdpowiedzi().stream().forEach(x -> {
+				odpowiedzi.add(x);
+			});
+			pe.getZleOdpowiedzi().stream().forEach(x -> {
+				odpowiedzi.add(x);
+			});
+			
+			
+			Collections.shuffle(odpowiedzi);
+			
+			
+			JLabel lblNewLabel_4 = new JLabel(odpowiedzi.get(0));
+			panel_1.add(lblNewLabel_4, "cell 1 2");
+			
+			JCheckBox chckbxNewCheckBox = new JCheckBox("");
+			panel_1.add(chckbxNewCheckBox, "cell 2 2");
+			check.put(odpowiedzi.get(0), chckbxNewCheckBox);///////////////////////////////////////////////////////////
+			
+			
+			JLabel lblNewLabel_5 = new JLabel(odpowiedzi.get(1));
+			panel_1.add(lblNewLabel_5, "cell 1 3");
+			
+			
+			JCheckBox chckbxNewCheckBox_1 = new JCheckBox("");
+			panel_1.add(chckbxNewCheckBox_1, "cell 2 3");
+			
+			check.put(odpowiedzi.get(1), chckbxNewCheckBox_1);
+			
+			JLabel lblNewLabel_6 = new JLabel(odpowiedzi.get(2));
+			panel_1.add(lblNewLabel_6, "cell 1 4");
+			
+			JCheckBox chckbxNewCheckBox_2 = new JCheckBox("");
+			panel_1.add(chckbxNewCheckBox_2, "cell 2 4");
+			
+			check.put(odpowiedzi.get(2), chckbxNewCheckBox_2);
+			
+			
+			JLabel lblNewLabel_7 = new JLabel(odpowiedzi.get(3));
+			panel_1.add(lblNewLabel_7, "cell 1 5");
+			
+			
+			JCheckBox chckbxNewCheckBox_3 = new JCheckBox("");
+			panel_1.add(chckbxNewCheckBox_3, "cell 2 5");	
+			
+			check.put(odpowiedzi.get(3), chckbxNewCheckBox_3);
+			
+			test.put(pe, check);
+		}
+		
+		
+		/**
+		 * zakończ i zapisz egzamin
+		 */
 		JButton btnNewButton_2 = new JButton("ZAKOŃCZ EGZAMIN");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			private final Map<PytanieEgzaminacyjne, Map<String, JCheckBox>> result = test;
+			public void actionPerformed(ActionEvent e) {
+				
+				String[] opcje =  { "Anuluj", "Zakończ"};
+				int rc = JOptionPane.showOptionDialog(
+				           null,                      // okno
+				           "Czy na pewno chcesz zakończyć egzamin?",          // komunikat
+				           "Zakończyć?",   // tytuł
+				           JOptionPane.DEFAULT_OPTION, // rodzaj przycisków u dołu (tu nieważny)
+				           JOptionPane.QUESTION_MESSAGE,// typ komunikatu (standardowa ikona)
+				           null,                        // własna ikona (tu: brak)
+				           opcje,                       // własne opcje - przyciski
+				           opcje[0]);                   // domyślny przycisk
+				
+				if(rc == 1) {
+					int rezultat = egzamin.check(test);
+					JOptionPane.showMessageDialog(frame, "Uzyskałeś " + rezultat + " punktów.", "Wynik egzaminu", JOptionPane.INFORMATION_MESSAGE);
+					var ocena = new Ocena(LocalDate.now(), rezultat, egzamin.toString(), osoba.getUczen());
+					db.save(ocena);
+					frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+				}
+
+				//System.out.println("Wybrałeś " + rc + " " + opcje[rc]);
+				
+				
+				
+				
+				
+			}
+		});
 		
 		
 		Thread thread = new Thread(new Runnable () {

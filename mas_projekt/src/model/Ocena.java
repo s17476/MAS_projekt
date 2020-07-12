@@ -82,6 +82,12 @@ public class Ocena {
 	private void setKomentarz(String komentarz) {
 		this.komentarz = komentarz;
 	}
+
+	@Override
+	public String toString() {
+		return "Ocena " + ocena + ", komentarz=" + komentarz;
+	}
+	
 	
 	
 	

@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import controller.DbController;
 import model.Egzamin;
+import model.Ocena;
 import model.Osoba;
 import model.PrzedmiotGrupa;
 import model.PytanieEgzaminacyjne;
@@ -20,6 +21,7 @@ import javax.swing.JMenuItem;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
@@ -43,6 +45,7 @@ import javax.swing.border.SoftBevelBorder;
 import org.hibernate.query.Query;
 
 import javax.swing.border.BevelBorder;
+import javax.swing.JList;
 
 public class MainWindow extends JFrame {
 	
@@ -157,14 +160,61 @@ public class MainWindow extends JFrame {
 		
 		JPanel uczen = new JPanel();
 		panel_3.add(uczen, "Uczen");
-		uczen.setLayout(new MigLayout("", "[grow][][][][][grow]", "[grow][][][][grow][grow]"));
+		uczen.setLayout(new MigLayout("", "[grow][][][][][grow]", "[][][][][][][grow][grow]"));
 		
 		JLabel lblNewLabel_3 = new JLabel("Dostępne testy:");
-		uczen.add(lblNewLabel_3, "flowx,cell 0 0");
+		uczen.add(lblNewLabel_3, "cell 0 0");
+		JButton btnNewButton_8 = new JButton("Rozwiąż");
+		btnNewButton_8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.setEnabled(false);
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							new EgzaminView("Egzamin", db, (Egzamin)comboBox_1.getSelectedItem(), frame, osoba);
+						
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+				
+			}
+		});
 		
+		
+		uczen.add(btnNewButton_8, "cell 0 2");
+		DefaultListModel<Ocena> lm = new DefaultListModel();
+		JList list_1 = new JList(lm);
 		JLabel lblNewLabel_4 = new JLabel("Moduł uczeń");
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		uczen.add(lblNewLabel_4, "cell 1 2");
+		uczen.add(lblNewLabel_4, "cell 1 4");
+		
+		JButton btnNewButton_9 = new JButton("Pokaż moje oceny");
+		btnNewButton_9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					CriteriaBuilder cb = db.getCriteriaBuilder();
+					CriteriaQuery<Ocena> cr = cb.createQuery(Ocena.class);
+					Root<Ocena> root = cr.from(Ocena.class);
+					
+					cr.select(root).where(cb.equal(root.get("uczen"), osoba.getUczen()));/////////////////////////////////////////////////////////////////////
+					
+					 
+					Query<Ocena> query = db.createQuery(cr);
+					List<Ocena> results = (List<Ocena>)query.getResultList();
+					
+					results.forEach(x -> lm.addElement(x));
+				}catch(Exception exc) {}
+			}
+		});
+		uczen.add(btnNewButton_9, "cell 0 5");
+		
+		JPanel panel_4 = new JPanel();
+		uczen.add(panel_4, "cell 0 6 1 2,grow");
+		
+		
+		panel_4.add(list_1);
 		
 		
 		
@@ -201,26 +251,6 @@ public class MainWindow extends JFrame {
 		/**
 		 * uczeń - rozwiąż egzamin///////////////////////////////////////////////////////////////////////
 		 */
-		JButton btnNewButton_8 = new JButton("Rozwiąż");
-		btnNewButton_8.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frame.setEnabled(false);
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							new EgzaminView("Egzamin", db, (Egzamin)comboBox_1.getSelectedItem(), frame);
-						
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
-				
-			}
-		});
-		
-		
-		uczen.add(btnNewButton_8, "cell 0 0");
 		
 		JPanel nauczyciel = new JPanel();
 		nauczyciel.setBorder(null);

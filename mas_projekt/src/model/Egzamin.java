@@ -1,7 +1,10 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -14,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
+import javax.swing.JCheckBox;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -112,7 +116,7 @@ public class Egzamin {
 	
 	
 	@ManyToMany(cascade=CascadeType.ALL)
-	private List<PytanieEgzaminacyjne> getPytaniaEgzaminacyjne() {
+	public List<PytanieEgzaminacyjne> getPytaniaEgzaminacyjne() {
 		return pytaniaEgzaminacyjne;
 	}
 
@@ -154,6 +158,30 @@ public class Egzamin {
 		return tytul + " z przedmiotu - " + przedmiot;
 	};
 	
+	@Transient
+	public int check(Map<PytanieEgzaminacyjne, Map<String, JCheckBox>> test) {
+			int punkty = 0;
+			
+			for(int i = 0; i < pytaniaEgzaminacyjne.size(); i++) {
+				boolean isOk = true;;
+				Map<String, JCheckBox> map = test.get(pytaniaEgzaminacyjne.get(i));
+				Set<String> set = map.keySet();
+				List<String> list = new ArrayList<>(); 
+			    for (String x : set) 
+			      list.add(x);
+					//String[] pytania = (String[]) map.keySet().toArray();
+					for(int j = 0; j < list.size(); j++) {
+						if(map.get(list.get(j)).isSelected() && pytaniaEgzaminacyjne.get(i).getZleOdpowiedzi().contains(list.get(j)))
+							isOk = false;
+						if(!map.get(list.get(j)).isSelected() && pytaniaEgzaminacyjne.get(i).getDobreOdpowiedzi().contains(list.get(j)))
+							isOk = false;
+					}
+				if(isOk) punkty++;
+				
+			}
+		
+		return punkty;
+	}
 	
 	
 }
