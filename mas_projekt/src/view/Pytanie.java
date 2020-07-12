@@ -1,9 +1,6 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.EventQueue;
-
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -22,20 +19,22 @@ import javax.swing.JSeparator;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.awt.event.ActionEvent;
+
+/**
+ * 
+ * @author Grzegorz Frączek
+ *
+ */
 
 public class Pytanie extends JFrame {
 
 	private JPanel contentPane;
-
-	DefaultListModel listModel;
-	DbController db;
-	JFrame parent;
-	JFrame frame = this;
-	Przedmiot przedmiot;
+	public DefaultListModel listModel;
+	public DbController db;
+	public JFrame parent;
+	public JFrame frame = this;
+	public Przedmiot przedmiot;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
@@ -44,12 +43,7 @@ public class Pytanie extends JFrame {
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private final ButtonGroup buttonGroup_1 = new ButtonGroup();
 
-	/**
-	 * Create the frame.
-	 * @param parent 
-	 * @param db 
-	 * @param string 
-	 */
+	
 	public Pytanie(String name, DbController db, JFrame parent, DefaultListModel listModel, Przedmiot przedmiot) {
 		super(name);
 		this.db = db;
@@ -84,7 +78,7 @@ public class Pytanie extends JFrame {
 		contentPane.add(textField_1, "cell 1 3,growx");
 		textField_1.setColumns(10);
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton();//////////////////////////////////////////////////////////////////////1
+		JRadioButton rdbtnNewRadioButton = new JRadioButton();
 		buttonGroup.add(rdbtnNewRadioButton);
 		contentPane.add(rdbtnNewRadioButton, "cell 2 3");
 		rdbtnNewRadioButton.setSelected(true);
@@ -93,13 +87,9 @@ public class Pytanie extends JFrame {
 		buttonGroup.add(rdbtnNewRadioButton_1);
 		contentPane.add(rdbtnNewRadioButton_1, "cell 3 3");
 		
-
-		
 		ButtonGroup buttonGroup = new ButtonGroup();
 		buttonGroup.add(rdbtnNewRadioButton);
 		buttonGroup.add(rdbtnNewRadioButton_1);
-		
-		
 		
 		textField_2 = new JTextField();
 		contentPane.add(textField_2, "cell 1 4,growx");
@@ -180,8 +170,6 @@ public class Pytanie extends JFrame {
 						return;
 					}
 					
-					
-					
 					PytanieEgzaminacyjne pe = new PytanieEgzaminacyjne(textField.getText(), przedmiot);
 					if(buttonGroup.isSelected(rdbtnNewRadioButton.getModel())) pe.dodajZlaOdpowiedz(textField_1.getText());
 					else pe.dodajDobraOdpowiedz(textField_1.getText());
@@ -206,8 +194,6 @@ public class Pytanie extends JFrame {
 		});
 		panel.add(btnNewButton_1);
 		
-		
-		
 		setLocationRelativeTo(null);
 		setVisible(true);
 		addWindowListener(new java.awt.event.WindowAdapter() {
@@ -217,5 +203,4 @@ public class Pytanie extends JFrame {
 		    }
 		});
 	}
-
 }

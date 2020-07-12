@@ -36,13 +36,18 @@ import javax.swing.JPasswordField;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+/**
+ * 
+ * @author Grzegorz Frączek
+ *
+ */
+
 public class LogIn extends JFrame {
 	private JFrame frame= this;
 	private String name;
 	private DbController db;
 	private JTextField textField;
 	private JPasswordField passwordField;
-	
 
 	/**
 	 * Create the frame.
@@ -75,7 +80,6 @@ public class LogIn extends JFrame {
 		JButton btnNewButton = new JButton("LOG IN");
 
 		panel_1.add(btnNewButton);
-
 		
 		/**
 		 * Log in
@@ -94,20 +98,14 @@ public class LogIn extends JFrame {
 				
 				cr.select(root).where(predicates);
 				
-				 
 				Query<Osoba> query = db.createQuery(cr);
 				List<Osoba> results = (List<Osoba>)query.getResultList();
-				
-				
-				//System.out.println(pass);
-				//System.out.println(results.get(0).getClass());
 				
 				if(results.size() > 0) { 
 					isOk(results.get(0), db);
 					close();
 				}else {
 					JOptionPane.showMessageDialog(frame, "Zły pesel lub hasło");
-					
 				}
 			}
 		});
@@ -124,8 +122,6 @@ public class LogIn extends JFrame {
 		});
 	}
 	
-	
-	
 	private void close() {
 		this.setVisible(false);;
 	}
@@ -134,10 +130,7 @@ public class LogIn extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-
 					MainWindow frame = new MainWindow(osoba, db);
-
-					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

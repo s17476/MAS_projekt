@@ -1,18 +1,13 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import org.hibernate.query.Query;
-
 import controller.DbController;
 import model.Grupa;
-import model.Osoba;
 import model.Przedmiot;
 import model.PrzedmiotGrupa;
 import net.miginfocom.swing.MigLayout;
@@ -21,10 +16,6 @@ import java.awt.Font;
 import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
 import javax.swing.JSeparator;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -32,6 +23,12 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
+
+/**
+ * 
+ * @author Grzegorz Frączek
+ *
+ */
 
 public class Creator extends JFrame {
 
@@ -47,12 +44,10 @@ public class Creator extends JFrame {
 		super(name);
 		this.db = db;
 		this.parent = parent;
-		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		/**
 		 *pobierz dane grup i przedmiotów
 		 */
-		
 		List<PrzedmiotGrupa> przedmiotyWGrupach = (List<PrzedmiotGrupa>)db.load("PrzedmiotGrupa");
 		List<Przedmiot> przedmioty = new ArrayList();
 		przedmiotyWGrupach.stream().forEach(x -> {
@@ -61,13 +56,9 @@ public class Creator extends JFrame {
 				przedmioty.add(x.getPrzedmiot());
 		});
 		
-		
-		
-		
-		
+
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		//setPreferredSize(new Dimension(600, 400));
 		setContentPane(contentPane);
 		contentPane.setLayout(new MigLayout("", "[grow][200px,grow][grow]", "[][][][][][][][][][][][][]"));
 		
@@ -103,15 +94,15 @@ public class Creator extends JFrame {
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		contentPane.add(lblNewLabel_1, "cell 1 7");
 		
-		
-		
-		
 		JSeparator separator = new JSeparator();
 		contentPane.add(separator, "cell 1 11,grow");
 		
 		JPanel panel = new JPanel();
 		contentPane.add(panel, "cell 0 12 3 1,growx");
 		
+		/**
+		 * przycisk anuluj
+		 */
 		JButton btnNewButton = new JButton("Anuluj");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -119,6 +110,7 @@ public class Creator extends JFrame {
 				frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 			}
 		});
+		
 		panel.add(btnNewButton);
 		
 		

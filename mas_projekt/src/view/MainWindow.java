@@ -1,33 +1,24 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
 import controller.DbController;
 import model.Egzamin;
 import model.Ocena;
 import model.Osoba;
 import model.PrzedmiotGrupa;
-import model.PytanieEgzaminacyjne;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
-import javax.swing.JMenuItem;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.swing.DefaultListModel;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import java.awt.Color;
-import java.awt.SystemColor;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.CardLayout;
@@ -37,15 +28,19 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
-import javax.swing.border.LineBorder;
 import javax.swing.JSeparator;
-import javax.swing.UIManager;
 import javax.swing.border.SoftBevelBorder;
 
 import org.hibernate.query.Query;
 
 import javax.swing.border.BevelBorder;
 import javax.swing.JList;
+
+/**
+ * 
+ * @author Grzegorz Frączek
+ *
+ */
 
 public class MainWindow extends JFrame {
 	
@@ -55,8 +50,6 @@ public class MainWindow extends JFrame {
 	public JFrame frame = this;
 	public Egzamin egzamin;
 	public final JComboBox<Egzamin> comboBox_1;
-
-
 
 	/**
 	 * Create the frame.
@@ -69,14 +62,6 @@ public class MainWindow extends JFrame {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 958, 400);
-		
-		/**
-		 * Launch the application.
-		 */
-		
-		 
-		
-		
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -120,13 +105,10 @@ public class MainWindow extends JFrame {
 		if(osoba.getUczen() != null)
 			list.add(osoba.getUczen());
 		
-		//if (list.size() == 2) list.remove(0);
-		
 		JPanel panel_7 = new JPanel();
 		contentPane.add(panel_7, "cell 5 0");
 		FlowLayout flowLayout = (FlowLayout) panel_7.getLayout();
 		flowLayout.setAlignment(FlowLayout.RIGHT);
-		
 		
 		/**
 		 * wybór funkcji użytkownika w oknie głównym
@@ -145,10 +127,6 @@ public class MainWindow extends JFrame {
 			}
 		});
 		panel_7.add(comboBox);
-		
-		
-		
-		
 		
 		JPanel welcome = new JPanel();
 		panel_3.add(welcome, "Welcome");
@@ -182,7 +160,6 @@ public class MainWindow extends JFrame {
 			}
 		});
 		
-		
 		uczen.add(btnNewButton_8, "cell 0 2");
 		DefaultListModel<Ocena> lm = new DefaultListModel();
 		JList list_1 = new JList(lm);
@@ -190,6 +167,10 @@ public class MainWindow extends JFrame {
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		uczen.add(lblNewLabel_4, "cell 1 4");
 		
+		
+		/**
+		 * pobiera oceny z bazy danych
+		 */
 		JButton btnNewButton_9 = new JButton("Pokaż moje oceny");
 		btnNewButton_9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -200,7 +181,6 @@ public class MainWindow extends JFrame {
 					
 					cr.select(root).where(cb.equal(root.get("uczen"), osoba.getUczen()));/////////////////////////////////////////////////////////////////////
 					
-					 
 					Query<Ocena> query = db.createQuery(cr);
 					List<Ocena> results = (List<Ocena>)query.getResultList();
 					
@@ -216,20 +196,12 @@ public class MainWindow extends JFrame {
 		JPanel panel_4 = new JPanel();
 		uczen.add(panel_4, "cell 0 6 1 2,grow");
 		
-		
 		panel_4.add(list_1);
 		
-		
-		
-
-		
-		
-		
 		/**
-		 * pobiera dostępne Egzaminy
+		 * pobiera dostępne egzaminy
 		 */
 		if(osoba.getUczen() != null) {
-		
 		
 			CriteriaBuilder cb = db.getCriteriaBuilder();
 			CriteriaQuery<PrzedmiotGrupa> cr = cb.createQuery(PrzedmiotGrupa.class);
@@ -241,19 +213,13 @@ public class MainWindow extends JFrame {
 			Query<PrzedmiotGrupa> query = db.createQuery(cr);
 			List<PrzedmiotGrupa> results = (List<PrzedmiotGrupa>)query.getResultList();
 			
-			
-			
-			comboBox_1 = new JComboBox(results.get(0).getListaEgzaminow().toArray());////////////////////////////////////////tu testy
+			comboBox_1 = new JComboBox(results.get(0).getListaEgzaminow().toArray());
 			uczen.add(comboBox_1, "cell 0 0");
 			
 			System.out.println("Jest grupa "+results);
 		}
 		else
 			comboBox_1 = new  JComboBox();
-		
-		/**
-		 * uczeń - rozwiąż egzamin///////////////////////////////////////////////////////////////////////
-		 */
 		
 		JPanel nauczyciel = new JPanel();
 		nauczyciel.setBorder(null);
@@ -287,7 +253,6 @@ public class MainWindow extends JFrame {
 							new Creator("Utwórz nowy test", db, frame);
 						} catch (Exception e) {
 							e.printStackTrace();
-							
 						}
 					}
 				});
@@ -297,7 +262,6 @@ public class MainWindow extends JFrame {
 		
 		JButton btnNewButton_7 = new JButton("Pokaż testy");
 		panel_1.add(btnNewButton_7, "cell 0 4,growx");
-		
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -327,5 +291,4 @@ public class MainWindow extends JFrame {
 		    }
 		});
 	}
-
 }

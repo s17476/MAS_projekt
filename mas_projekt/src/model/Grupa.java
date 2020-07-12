@@ -15,6 +15,12 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
+/**
+ * 
+ * @author Grzegorz Frączek
+ *
+ */
+
 @Entity(name = "Grupa")
 public class Grupa {
 	
@@ -23,10 +29,7 @@ public class Grupa {
 	public String numerGrupy;
 	public List<Uczen> listaUcznow = new ArrayList<>();
 	
-	
-	
-	public Grupa() {
-	}
+	public Grupa() {}
 
 	public Grupa(LocalDate rokSzkolny, String numerGrupy) {
 		super();
@@ -81,6 +84,4 @@ public class Grupa {
 	public String toString() {
 		return "["+numerGrupy+"]";
 	}
-	
-	
 }

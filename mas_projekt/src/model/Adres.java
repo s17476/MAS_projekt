@@ -4,6 +4,12 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.GenericGenerator;
 
+/**
+ * 
+ * @author Grzegorz Frączek
+ *
+ */
+
 @Entity(name = "Adres")
 public class Adres {
 	
@@ -13,8 +19,6 @@ public class Adres {
 	private String miejscowosc;
 	private String kodPocztowy;
 	private String telefon;
-	
-	
 	
 	public Adres() {
 	}
@@ -83,7 +87,4 @@ public class Adres {
 	private void setTelefon(String telefon) {
 		this.telefon = telefon;
 	}
-	
-	
-	
 }

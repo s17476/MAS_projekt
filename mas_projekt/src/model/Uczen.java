@@ -14,6 +14,13 @@ import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
+
+/**
+ * 
+ * @author Grzegorz Frączek
+ *
+ */
+
 @Entity(name = "Uczeń")
 public class Uczen {
 	
@@ -23,10 +30,7 @@ public class Uczen {
 	private Osoba opiekun;
 	private LocalDate dataUkonczeniaSzkoly;
 	
-	
-	
-	public Uczen() {
-	}
+	public Uczen() {}
 
 	public Uczen(LocalDate dataRozpoczecia, Grupa grupa, Osoba opiekun, LocalDate dataUkonczeniaSzkoly) {
 		super();
@@ -44,8 +48,6 @@ public class Uczen {
 		return id;
 	}
 
-
-
 	private void setId(long id) {
 		this.id = id;
 	}
@@ -55,48 +57,36 @@ public class Uczen {
 		return dataRozpoczecia;
 	}
 
-
-
 	private void setDataRozpoczecia(LocalDate dataRozpoczecia) {
 		this.dataRozpoczecia = dataRozpoczecia;
 	}
-
 
 	@ManyToOne(cascade=CascadeType.ALL)
 	public Grupa getGrupa() {
 		return grupa;
 	}
 
-
-
 	private void setGrupa(Grupa grupa) {
 		this.grupa = grupa;
 	}
-
 
 	@OneToOne(cascade=CascadeType.ALL)
 	private Osoba getOpiekun() {
 		return opiekun;
 	}
 
-
-
 	private void setOpiekun(Osoba opiekun) {
 		this.opiekun = opiekun;
 	}
-
 
 	@Basic
 	private LocalDate getDataUkonczeniaSzkoly() {
 		return dataUkonczeniaSzkoly;
 	}
 
-
-
 	private void setDataUkonczeniaSzkoly(LocalDate dataUkonczeniaSzkoly) {
 		this.dataUkonczeniaSzkoly = dataUkonczeniaSzkoly;
 	}
-
 
 	@Transient
 	public void przeslijPraceDomowa(File file) {

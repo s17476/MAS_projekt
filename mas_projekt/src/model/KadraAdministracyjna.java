@@ -4,6 +4,12 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.GenericGenerator;
 
+/**
+ * 
+ * @author Grzegorz Frączek
+ *
+ */
+
 @Entity(name = "KadraAdministracyjna")
 public class KadraAdministracyjna {
 
@@ -11,8 +17,7 @@ public class KadraAdministracyjna {
 	private String nazwaStanowiska;
 	private String zakresObowiazkow;
 	
-	public KadraAdministracyjna() {
-	}
+	public KadraAdministracyjna() {}
 	
 	public KadraAdministracyjna(String nazwaStanowiska, String zakresObowiazkow) {
 		super();
@@ -20,7 +25,6 @@ public class KadraAdministracyjna {
 		this.zakresObowiazkow = zakresObowiazkow;
 	}
 
-	
 	@Id
 	@GeneratedValue(generator = "increment")
 	@GenericGenerator(name = "increment", strategy  = "increment")
@@ -29,16 +33,9 @@ public class KadraAdministracyjna {
 		return id;
 	}
 
-
-
 	private void setId(long id) {
 		this.id = id;
 	}
-
-	
-
-	
-
 
 	private void setNazwaStanowiska(String nazwaStanowiska) {
 		this.nazwaStanowiska = nazwaStanowiska;
@@ -73,6 +70,4 @@ public class KadraAdministracyjna {
 	public String toString() {
 		return "Administrator";
 	}
-	
-	
 }

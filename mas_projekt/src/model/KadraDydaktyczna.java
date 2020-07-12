@@ -7,26 +7,24 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.GenericGenerator;
 
+/**
+ * 
+ * @author Grzegorz Frączek
+ *
+ */
+
 @Entity(name = "KadraDydaktyczna")
 public class KadraDydaktyczna {
 	
 	private long id;
 	private List<PrzedmiotGrupa> listaPrzedmiotów = new ArrayList<>();
 	
-	
-	
-	
-	public KadraDydaktyczna() {
-	}
-
-
+	public KadraDydaktyczna() {}
 
 	public KadraDydaktyczna(List<PrzedmiotGrupa> listaPrzedmiotów) {
 		super();
 		this.listaPrzedmiotów = listaPrzedmiotów;
 	}
-
-
 
 	@Id
 	@GeneratedValue(generator = "increment")
@@ -36,11 +34,10 @@ public class KadraDydaktyczna {
 		return id;
 	}
 
-
-
 	private void setId(long id) {
 		this.id = id;
 	}
+	
 	@Transient
 	public void dodajPrzedmiot(PrzedmiotGrupa przedmiot) {
 		listaPrzedmiotów.add(przedmiot);
@@ -52,19 +49,15 @@ public class KadraDydaktyczna {
 		return listaPrzedmiotów;
 	}
 
-
 	private void setListaPrzedmiotów(List<PrzedmiotGrupa> listaPrzedmiotów) {
 		this.listaPrzedmiotów = listaPrzedmiotów;
 	}
 
 	public void sprawdzWyniki() {}
 
-
 	@Transient
 	@Override
 	public String toString() {
 		return "Dydaktyk";
-	}
-	
-	
+	}	
 }

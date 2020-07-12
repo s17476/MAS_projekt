@@ -8,6 +8,12 @@ import javax.persistence.Id;
 
 import org.hibernate.annotations.GenericGenerator;
 
+/**
+ * 
+ * @author Grzegorz Frączek
+ *
+ */
+
 @Entity(name = "Przedmiot")
 public class Przedmiot {
 
@@ -16,10 +22,7 @@ public class Przedmiot {
 	public String symbol;
 	public String opis;
 	
-	
-	
-	public Przedmiot() {
-	}
+	public Przedmiot() {}
 
 	public Przedmiot(String nazwaPrzedmiotu, String symbol, String opis) {
 		super();
@@ -35,8 +38,6 @@ public class Przedmiot {
 	private long getId() {
 		return id;
 	}
-
-
 
 	private void setId(long id) {
 		this.id = id;
@@ -73,8 +74,4 @@ public class Przedmiot {
 	public String toString() {
 		return "["+symbol+"]"+nazwaPrzedmiotu;
 	}
-	
-	
-	
-	
 }

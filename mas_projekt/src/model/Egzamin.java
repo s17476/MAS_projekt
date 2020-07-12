@@ -21,6 +21,12 @@ import javax.swing.JCheckBox;
 
 import org.hibernate.annotations.GenericGenerator;
 
+/**
+ * 
+ * @author Grzegorz Frączek
+ *
+ */
+
 @Entity(name = "Egzamin")
 public class Egzamin {
 
@@ -34,12 +40,10 @@ public class Egzamin {
 	public Ocena ocena;
 	public Przedmiot przedmiot;
 	
-
-	public Egzamin() {
-	}
+	public Egzamin() {}
 
 	public Egzamin(String tytul, List<PytanieEgzaminacyjne> pytaniaEgzaminacyjne, int iloscPunktow, int dostepnyCzas,
-			LocalDate dostepnyOd, LocalDate dostepnyDo, Przedmiot przedmiot) {
+						LocalDate dostepnyOd, LocalDate dostepnyDo, Przedmiot przedmiot) {
 		super();
 		this.tytul = tytul;
 		this.pytaniaEgzaminacyjne = pytaniaEgzaminacyjne;
@@ -57,8 +61,6 @@ public class Egzamin {
 	private long getId() {
 		return id;
 	}
-
-	
 
 	private void setId(long id) {
 		this.id = id;
@@ -114,7 +116,6 @@ public class Egzamin {
 		this.dostepnyDo = dostepnyDo;
 	}
 	
-	
 	@ManyToMany(cascade=CascadeType.ALL)
 	public List<PytanieEgzaminacyjne> getPytaniaEgzaminacyjne() {
 		return pytaniaEgzaminacyjne;
@@ -158,6 +159,12 @@ public class Egzamin {
 		return tytul + " z przedmiotu - " + przedmiot;
 	};
 	
+	/**
+	 * Metoda sprawdza wynik egzaminu.
+	 * 
+	 * @param odpowiedzi zaznaczone przez ucznia test
+	 * @return wynik egzaminu
+	 */
 	@Transient
 	public int check(Map<PytanieEgzaminacyjne, Map<String, JCheckBox>> test) {
 			int punkty = 0;
@@ -182,6 +189,4 @@ public class Egzamin {
 		
 		return punkty;
 	}
-	
-	
 }

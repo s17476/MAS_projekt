@@ -1,23 +1,18 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TimeZone;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JRootPane;
 import javax.swing.border.EmptyBorder;
 
 import controller.DbController;
@@ -25,18 +20,22 @@ import model.Egzamin;
 import model.Ocena;
 import model.Osoba;
 import model.PytanieEgzaminacyjne;
-import model.Uczen;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
-import javax.swing.Timer;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JCheckBox;
 import javax.swing.border.LineBorder;
+
+/**
+ * 
+ * @author Grzegorz Frączek
+ *
+ */
 
 public class EgzaminView extends JFrame {
 	JFrame frame  =this;
@@ -46,11 +45,6 @@ public class EgzaminView extends JFrame {
 	private DbController db;
 	public PytanieEgzaminacyjne pe;
 	public Osoba osoba;
-
-	/**
-	 * Launch the application.
-	 */
-	
 
 	/**
 	 * Create the frame.
@@ -70,9 +64,6 @@ public class EgzaminView extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new MigLayout("", "[][grow][grow][]", "[][][grow][]"));
 		
-		
-		
-		///////////
 		JLabel lblNewLabel = new JLabel(egzamin.toString());
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		contentPane.add(lblNewLabel, "cell 0 0");
@@ -91,23 +82,20 @@ public class EgzaminView extends JFrame {
 		scrollPane.setViewportView(panel);
 		panel.setLayout(new MigLayout("", "[grow]", "[][][][][][][][][][]"));
 			
-		
 		Map<PytanieEgzaminacyjne, Map<String, JCheckBox>> test = new HashMap<>();
 			
+		/**
+		 * dodaje pytania  i odpowiedzi do paneli
+		 */
 		for (int i = 0; i < egzamin.getPytaniaEgzaminacyjne().size(); i++) {
 			
 			pe = egzamin.getPytaniaEgzaminacyjne().get(i);
 			
 			Map<String, JCheckBox> check = new HashMap<>();
 			
-			
-			
 			JPanel panel_1 = new JPanel();
 			panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-			
 			JSeparator separator = new JSeparator();
-			
-			
 			
 			panel.add(panel_1, "cell 0 "+i+",grow");
 			panel_1.setLayout(new MigLayout("", "[][grow][center]", "[][][][][]"));
@@ -125,21 +113,17 @@ public class EgzaminView extends JFrame {
 				odpowiedzi.add(x);
 			});
 			
-			
 			Collections.shuffle(odpowiedzi);
-			
 			
 			JLabel lblNewLabel_4 = new JLabel(odpowiedzi.get(0));
 			panel_1.add(lblNewLabel_4, "cell 1 2");
 			
 			JCheckBox chckbxNewCheckBox = new JCheckBox("");
 			panel_1.add(chckbxNewCheckBox, "cell 2 2");
-			check.put(odpowiedzi.get(0), chckbxNewCheckBox);///////////////////////////////////////////////////////////
-			
+			check.put(odpowiedzi.get(0), chckbxNewCheckBox);
 			
 			JLabel lblNewLabel_5 = new JLabel(odpowiedzi.get(1));
 			panel_1.add(lblNewLabel_5, "cell 1 3");
-			
 			
 			JCheckBox chckbxNewCheckBox_1 = new JCheckBox("");
 			panel_1.add(chckbxNewCheckBox_1, "cell 2 3");
@@ -154,7 +138,6 @@ public class EgzaminView extends JFrame {
 			
 			check.put(odpowiedzi.get(2), chckbxNewCheckBox_2);
 			
-			
 			JLabel lblNewLabel_7 = new JLabel(odpowiedzi.get(3));
 			panel_1.add(lblNewLabel_7, "cell 1 5");
 			
@@ -167,52 +150,17 @@ public class EgzaminView extends JFrame {
 			test.put(pe, check);
 		}
 		
+		JButton btnNewButton_2 = new JButton("ZAKOŃCZ EGZAMIN");
 		
 		/**
-		 * zakończ i zapisz egzamin
+		 * wątek minutnika
 		 */
-		JButton btnNewButton_2 = new JButton("ZAKOŃCZ EGZAMIN");
-		btnNewButton_2.addActionListener(new ActionListener() {
-			private final Map<PytanieEgzaminacyjne, Map<String, JCheckBox>> result = test;
-			public void actionPerformed(ActionEvent e) {
-				
-				String[] opcje =  { "Anuluj", "Zakończ"};
-				int rc = JOptionPane.showOptionDialog(
-				           null,                      // okno
-				           "Czy na pewno chcesz zakończyć egzamin?",          // komunikat
-				           "Zakończyć?",   // tytuł
-				           JOptionPane.DEFAULT_OPTION, // rodzaj przycisków u dołu (tu nieważny)
-				           JOptionPane.QUESTION_MESSAGE,// typ komunikatu (standardowa ikona)
-				           null,                        // własna ikona (tu: brak)
-				           opcje,                       // własne opcje - przyciski
-				           opcje[0]);                   // domyślny przycisk
-				
-				if(rc == 1) {
-					int rezultat = egzamin.check(test);
-					JOptionPane.showMessageDialog(frame, "Uzyskałeś " + rezultat + " punktów.", "Wynik egzaminu", JOptionPane.INFORMATION_MESSAGE);
-					var ocena = new Ocena(LocalDate.now(), rezultat, egzamin.toString(), osoba.getUczen());
-					db.save(ocena);
-					frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
-				}
-
-				//System.out.println("Wybrałeś " + rc + " " + opcje[rc]);
-				
-				
-				
-				
-				
-			}
-		});
-		
-		
 		Thread thread = new Thread(new Runnable () {
-
 	        @Override
 	        public void run() {
 	            int countdownSeconds = egzamin.getDostepnyCzas() * 60;
 
 	            for (int i = countdownSeconds ; i >= 0; i--) {
-
 	                try{
 	                    Thread.sleep(1000);
 	                }catch (InterruptedException e) {}
@@ -226,18 +174,46 @@ public class EgzaminView extends JFrame {
 	    });
 		thread.start();
 		
+		/**
+		 * zakończ i zapisz egzamin
+		 */
 		
+		btnNewButton_2.addActionListener(new ActionListener() {
+			private final Map<PytanieEgzaminacyjne, Map<String, JCheckBox>> result = test;
+			public void actionPerformed(ActionEvent e) {
+				
+				String[] opcje =  { "Anuluj", "Zakończ"};
+				int rc = JOptionPane.showOptionDialog(
+				           null,
+				           "Czy na pewno chcesz zakończyć egzamin?",
+				           "Zakończyć?",
+				           JOptionPane.DEFAULT_OPTION,
+				           JOptionPane.QUESTION_MESSAGE,
+				           null,
+				           opcje,
+				           opcje[0]);
+				
+				if(rc == 1) {
+					int rezultat = egzamin.check(test);
+					JOptionPane.showMessageDialog(frame, "Uzyskałeś " + rezultat + " punktów.", "Wynik egzaminu", JOptionPane.INFORMATION_MESSAGE);
+					var ocena = new Ocena(LocalDate.now(), rezultat, egzamin.toString(), osoba.getUczen());
+					db.save(ocena);
+					parent.setEnabled(true);
+			    	thread.interrupt();
+					frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+				}
+			}
+		});
+		
+		/**
+		 * blokuje okno
+		 */
+		setUndecorated(true);
+		getRootPane().setWindowDecorationStyle(JRootPane.NONE);
 		
 		btnNewButton_2.setBackground(Color.RED);
 		contentPane.add(btnNewButton_2, "cell 2 3,alignx center");
 		setVisible(true);
-		addWindowListener(new java.awt.event.WindowAdapter() {
-		    @Override
-		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-		    	parent.setEnabled(true);
-		    	thread.interrupt();
-		    }
-		});
 	}
 
 }

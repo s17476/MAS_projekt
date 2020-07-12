@@ -1,11 +1,7 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.event.WindowEvent;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -13,33 +9,21 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.TableModelEvent;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
-
 import org.hibernate.query.Query;
 
 import controller.DbController;
 import model.Egzamin;
-import model.Osoba;
-import model.Przedmiot;
 import model.PrzedmiotGrupa;
 import model.PytanieEgzaminacyjne;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultListModel;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -49,6 +33,12 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
+
+/**
+ * 
+ * @author Grzegorz Frączek
+ *
+ */
 
 public class Selection extends JFrame {
 
@@ -64,13 +54,6 @@ public class Selection extends JFrame {
 	private JTextField textField_3;
 
 	/**
-	 * Launch the application.
-	 */
-
-		
-
-
-	/**
 	 * Create the frame.
 	 */
 	public Selection(String name, JFrame parent, DbController db, PrzedmiotGrupa pg) {
@@ -80,8 +63,6 @@ public class Selection extends JFrame {
 		this.pg = pg;
 		
 		((MainWindow)p.parent).setEnabled(false);
-		
-		
 		setPreferredSize(new Dimension(1000, 450));
 		setResizable(false);
 		setBounds(100, 100, 450, 300);
@@ -99,11 +80,6 @@ public class Selection extends JFrame {
 		JLabel lblNewLabel_2 = new JLabel("Wybrane:");
 		contentPane.add(lblNewLabel_2, "cell 2 1,alignx left,aligny top");
 		
-		
-		
-		
-		
-		
 		JPanel panel = new JPanel();
 		contentPane.add(panel, "cell 1 2,grow");
 		panel.setLayout(new MigLayout("", "[grow][][]", "[][][][]"));
@@ -117,6 +93,7 @@ public class Selection extends JFrame {
 		panel.add(btnNewButton, "cell 0 2 3 1,growx,aligny center");
 		
 		DefaultListModel<PytanieEgzaminacyjne> listModel = new DefaultListModel<>(); 
+		
 		/**
 		 * noew pytanie
 		 */
@@ -140,7 +117,6 @@ public class Selection extends JFrame {
 		JLabel lblNewLabel_3 = new JLabel("Wybrane pytanie:");
 		contentPane.add(lblNewLabel_3, "cell 0 3,alignx left,aligny top");
 		
-		
 		/**
 		 * Pobierz pytania z wybranego przedmiotu
 		 */
@@ -150,7 +126,6 @@ public class Selection extends JFrame {
 		
 		cr.select(root).where(cb.equal(root.get("przedmiot"), pg.getPrzedmiot()));
 		
-		 
 		Query<PytanieEgzaminacyjne> query = db.createQuery(cr);
 		List<PytanieEgzaminacyjne> results = (List<PytanieEgzaminacyjne>)query.getResultList();
 		
@@ -158,7 +133,6 @@ public class Selection extends JFrame {
 		JLabel lblNewLabel_4 = new JLabel();
 		lblNewLabel_4.setHorizontalAlignment(SwingConstants.LEFT);
 		JLabel lblNewLabel_6 = new JLabel("");
-		//lblNewLabel_6.setSize(500, 100);
 		
 		lblNewLabel_6.setHorizontalAlignment(SwingConstants.LEFT);
 		
@@ -170,7 +144,6 @@ public class Selection extends JFrame {
 				try {
 					String s = listModel.get(list.getSelectedIndex()).getTrescPytania();
 					lblNewLabel_4.setText(s);
-					
 				}catch(Exception exc) {}
 				try {
 					PytanieEgzaminacyjne p = (PytanieEgzaminacyjne)listModel.get(list.getSelectedIndex());
@@ -186,15 +159,11 @@ public class Selection extends JFrame {
 					odpowiedzi+="</pre></html>";
 					lblNewLabel_6.setText(odpowiedzi);
 					System.out.println(odpowiedzi);
-					
 				}catch(Exception exc) {}
-			
 			}
 		});
 
 		contentPane.add(list, "cell 0 2,grow");
-		
-		
 		DefaultListModel<PytanieEgzaminacyjne> list1Model = new DefaultListModel<>();
 		JList<PytanieEgzaminacyjne> list_1 = new JList<>(list1Model);
 		list_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -203,9 +172,6 @@ public class Selection extends JFrame {
 				JLabel lblNewLabel_7 = new JLabel("Tytuł:");
 				contentPane.add(lblNewLabel_7, "cell 1 3,alignx right");
 		
-				
-				
-				///////////////tu dodawać//////////////////////////////////////////////////////
 				JPanel panel_1 = new JPanel();
 				contentPane.add(panel_1, "cell 0 4,alignx left,growy");
 				
@@ -220,16 +186,10 @@ public class Selection extends JFrame {
 				JLabel lblNewLabel_9 = new JLabel("Dostępny od:");
 				contentPane.add(lblNewLabel_9, "cell 1 5,alignx trailing");
 				
-				
-				
 				JLabel lblNewLabel_5 = new JLabel("Odpowiedzi:");
 				contentPane.add(lblNewLabel_5, "cell 0 6,alignx left,aligny top");
 				
 				JPanel panel_2 = new JPanel();
-				//contentPane.add(panel_2, "cell 3 8, alignx left,growy");
-				
-				
-				
 
 				panel_1.add(lblNewLabel_4);
 				
@@ -272,7 +232,7 @@ public class Selection extends JFrame {
 				textField_2.setColumns(10);				
 				btnNewButton_4.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-					//	try {
+					try {
 							List<PytanieEgzaminacyjne> pe = new ArrayList();
 							for(int i = 0; i < list1Model.getSize(); i++) {
 								pe.add(list1Model.get(i));
@@ -283,25 +243,16 @@ public class Selection extends JFrame {
 							db.save(egzamin);
 							System.out.println(egzamin);
 							frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
-						//}catch(Exception exc) {
-						//	exc.printStackTrace();
-						//	JOptionPane.showMessageDialog(frame, "Sprawdź wprowadzone dane!");
-						//}
-						
-						
+						}catch(Exception exc) {
+							exc.printStackTrace();
+							JOptionPane.showMessageDialog(frame, "Sprawdź wprowadzone dane!");
+						}
 					}
 				});
-		/*
-		PytanieEgzaminacyjne pytania;
-		List<String> zleOdpowiedzi = pytania.getZleOdpowiedzi();
-		List<String> dobreOdpowiedzi = pytania.getDobreOdpowiedzi();
-		
-		
 
-		List<String> odpowiedzi = pytania.getZleOdpowiedzi();
-		pytania.getDobreOdpowiedzi().forEach(x -> odpowiedzi.add(x));
-		*/
-		
+		/**
+		* dodaj do egzaminu
+		 */
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(list.getSelectedIndex() > -1) {
@@ -313,7 +264,9 @@ public class Selection extends JFrame {
 			}
 		});
 		
-		
+		/**
+		 * usuń z egzaminu
+		 */
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(list_1.getSelectedIndex() > -1) {
@@ -324,11 +277,9 @@ public class Selection extends JFrame {
 			}
 		});
 		
-		
 		pack();
 		setLocationRelativeTo(null);
 		setVisible(true);
-		
 		addWindowListener(new java.awt.event.WindowAdapter() {
 		    @Override
 		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {

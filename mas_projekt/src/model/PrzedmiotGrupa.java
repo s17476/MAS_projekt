@@ -7,6 +7,11 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.GenericGenerator;
 
+/**
+ * 
+ * @author Grzegorz Frączek
+ *
+ */
 
 @Entity(name = "PrzedmiotGrupa")
 public class PrzedmiotGrupa {
@@ -18,17 +23,13 @@ public class PrzedmiotGrupa {
 	List<Egzamin> listaEgzaminow = new ArrayList<>();
 	List<ZadanieDomowe> listaZadanDomowych = new ArrayList<>();
 	
-	
-	
-	public PrzedmiotGrupa() {
-	}
+	public PrzedmiotGrupa() {}
 
 	public PrzedmiotGrupa(Przedmiot przedmiot, Grupa grupa, KadraDydaktyczna dudaktyk) {
 		super();
 		this.przedmiot = przedmiot;
 		this.grupa = grupa;
 		this.dydaktyk = dudaktyk;
-		
 	}
 	
 	@Id
@@ -38,8 +39,6 @@ public class PrzedmiotGrupa {
 	private long getId() {
 		return id;
 	}
-
-
 
 	private void setId(long id) {
 		this.id = id;
@@ -54,7 +53,6 @@ public class PrzedmiotGrupa {
 		return przedmiot;
 	}
 
-	
 	private void setPrzedmiot(Przedmiot przedmiot) {
 		this.przedmiot = przedmiot;
 	}
@@ -95,7 +93,4 @@ public class PrzedmiotGrupa {
 	public String toString() {
 		return "PrzedmiotGrupa [przedmiot=" + przedmiot + ", grupa=" + grupa;
 	}
-	
-	
-	
 }

@@ -11,6 +11,12 @@ import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
+/**
+ * 
+ * @author Grzegorz Frączek
+ *
+ */
+
 @Entity(name = "Ocena")
 public class Ocena {
 
@@ -20,10 +26,7 @@ public class Ocena {
 	public String komentarz;
 	public Uczen uczen;
 	
-	
-	
-	public Ocena() {
-	}
+	public Ocena() {}
 
 	public Ocena(LocalDate dataWystawienia, int ocena, String komentarz, Uczen uczen) {
 		super();
@@ -40,8 +43,6 @@ public class Ocena {
 	private long getId() {
 		return id;
 	}
-
-
 
 	private void setId(long id) {
 		this.id = id;
@@ -87,8 +88,4 @@ public class Ocena {
 	public String toString() {
 		return "Ocena " + ocena + ", komentarz=" + komentarz;
 	}
-	
-	
-	
-	
 }

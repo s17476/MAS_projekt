@@ -1,31 +1,31 @@
 package model;
 
 import java.time.LocalDate;
-
 import javax.persistence.*;
+
+/**
+ * 
+ * @author Grzegorz Frączek
+ *
+ */
+
 @Entity(name = "Osoba")
 public class Osoba {
 	
 	private String imie;
 	private String nazwisko;
 	private String password;
-	
 	private String pesel;
 	private LocalDate dataUrodzenia;
 	private String nrKontaBankowego;
 	private Adres adres;
 	private LocalDate dataZatrudnienia;
 	private LocalDate dataRozwiazaniaUmowyOprace;
-	
 	private Uczen uczen;
-	
-
 	private KadraAdministracyjna administrator;
 	private KadraDydaktyczna dydaktyk;
 	
 	public Osoba() {}
-	
-	
 	
 	public Osoba(String imie, String nazwisko, String password, String pesel, String dataUrodzenia) {///////////////do usunięcia
 		super();
@@ -41,8 +41,6 @@ public class Osoba {
 		return uczen;
 	}
 
-
-
 	public void setUczen(Uczen uczen) {
 		this.uczen = uczen;
 	}
@@ -52,13 +50,9 @@ public class Osoba {
 		return password;
 	}
 
-
-
 	private void setPassword(String password) {
 		this.password = password;
 	}
-
-
 
 	@Basic
 	public String getImie() {
@@ -145,6 +139,4 @@ public class Osoba {
 	public String toString() {
 		return this.imie+" "+this.nazwisko+" "+this.pesel+" "+this.password;
 	}
-	
-	
 }

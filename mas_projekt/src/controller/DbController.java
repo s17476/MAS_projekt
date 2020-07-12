@@ -16,6 +16,12 @@ import org.hibernate.query.Query;
 
 import model.Osoba;
 
+/**
+ * 
+ * @author Grzegorz Frączek
+ *
+ *kontroler zarządzający zapisem i odczytem z dazy danych
+ */
 
 public class DbController<E> {
 	StandardServiceRegistry registry = null;
@@ -23,27 +29,21 @@ public class DbController<E> {
 	Session session;
 
 	public DbController() {
-		
-		 
+
 		try {
 		    registry = new StandardServiceRegistryBuilder()
-		            .configure() // configures settings from hibernate.cfg.xml
+		            .configure()
 		            .build();
 		    sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
 		 
 		    session = sessionFactory.openSession();
 
-		    //List<Osoba> o2 = (List<Osoba>) session.createQuery("from Osoba").list();
 		}
 		catch (Exception e) {
 		    e.printStackTrace();
 		    StandardServiceRegistryBuilder.destroy( registry );
 		}
-
-		
-		
 	}
-	
 	
 	public Query<E> createQuery(CriteriaQuery<E> cr){
 		return session.createQuery(cr);
@@ -57,8 +57,6 @@ public class DbController<E> {
 		session.beginTransaction();
 		list.stream().forEach(o -> session.save(o));
 		session.getTransaction().commit();
-		
-
 	}
 	
 	public void save(E object) {
@@ -71,11 +69,9 @@ public class DbController<E> {
 	
 	public List<E> load(String s){
 		session.beginTransaction();
-		//List<Osoba> o2 = (List<Osoba>) session.createQuery("from Osoba").list();
 		List<E> tmpList = session.createQuery("from "+s).list();
 		session.getTransaction().commit();
 		return tmpList;
-		
 	}
 	
 	public void close() {

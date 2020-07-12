@@ -17,6 +17,11 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
+/**
+ * 
+ * @author Grzegorz Frączek
+ *
+ */
 
 @Entity(name = "PytanieEgzaminacyjne")
 public class PytanieEgzaminacyjne {
@@ -27,12 +32,7 @@ public class PytanieEgzaminacyjne {
 	public List<String> dobreOdpowiedzi = new ArrayList<>();
 	public Przedmiot przedmiot;
 	
-	
-	
-	
-
-	public PytanieEgzaminacyjne() {
-	}
+	public PytanieEgzaminacyjne() {}
 
 	public PytanieEgzaminacyjne(String trescPytania, Przedmiot przedmiot) {
 		super();
@@ -47,7 +47,6 @@ public class PytanieEgzaminacyjne {
 	private long getId() {
 		return id;
 	}
-
 
 	@Transient
 	public void dodajZlaOdpowiedz(String s) {
@@ -105,6 +104,4 @@ public class PytanieEgzaminacyjne {
 			return trescPytania.substring(0, 37) + "...";
 		return "" +trescPytania;
 	}
-	
-	
 }

@@ -4,6 +4,12 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.GenericGenerator;
 
+/**
+ * 
+ * @author Grzegorz Frączek
+ *
+ */
+
 @Entity(name = "ZadanieDomowe")
 public class ZadanieDomowe {
 
@@ -12,11 +18,8 @@ public class ZadanieDomowe {
 	public String trescZadania;
 	public Ocena ocena;
 	
-	
-	
 	public ZadanieDomowe() {
 	}
-
 
 	public ZadanieDomowe(String tytul, String trescZadania, Ocena ocena) {
 		super();
@@ -24,7 +27,6 @@ public class ZadanieDomowe {
 		this.trescZadania = trescZadania;
 	}
 
-	
 	@Id
 	@GeneratedValue(generator = "increment")
 	@GenericGenerator(name = "increment", strategy  = "increment")
@@ -32,8 +34,6 @@ public class ZadanieDomowe {
 	private long getId() {
 		return id;
 	}
-
-
 
 	private void setId(long id) {
 		this.id = id;
@@ -63,6 +63,4 @@ public class ZadanieDomowe {
 	private void setOcena(Ocena ocena) {
 		this.ocena = ocena;
 	}
-	
-	
 }

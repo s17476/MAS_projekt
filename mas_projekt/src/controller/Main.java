@@ -1,6 +1,8 @@
+
 package controller;
 
 import java.awt.EventQueue;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,12 +26,42 @@ import model.Uczen;
 import view.LogIn;
 import view.MainWindow;
 
+/**
+ * 
+ * @author Grzegorz Frączek
+ *
+ */
+
 public class Main {
 	
 	public static void main(String[] args) {
+		/**
+		 * kontroler Bd
+		 */
 		DbController db = new DbController<>();
 		
+		/**
+		 * wypełnienie bazy danych
+		 */
+		//nowaBd();
 		
+		/**
+		 * uruchomienie GUI
+		 */
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					new LogIn("Log in please...", db);
+				} catch (Exception e) {
+					e.printStackTrace();
+					
+				}
+			}
+		});
+
+	}
+	
+	public static void nowaBd() {
 		/**
 		 * przedmioty
 		 */
@@ -133,26 +165,10 @@ public class Main {
 		System.out.println(o1);
 		 */
 		
-		
-		
+
 		//var osoby = db.load("from Osoba");
 		
 		//System.out.println(osoby);
-		
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					new LogIn("Log in please...", db);
-				} catch (Exception e) {
-					e.printStackTrace();
-					
-				}
-			}
-		});
-
-
-		
-		
 	}
 }
 	
