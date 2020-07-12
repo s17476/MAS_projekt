@@ -86,7 +86,7 @@ public class Egzamin {
 		this.iloscPunktow = iloscPunktow;
 	}
 	@Basic
-	private int getDostepnyCzas() {
+	public int getDostepnyCzas() {
 		return dostepnyCzas;
 	}
 
