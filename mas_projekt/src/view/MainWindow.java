@@ -204,7 +204,10 @@ public class MainWindow extends JFrame {
 					Query<Ocena> query = db.createQuery(cr);
 					List<Ocena> results = (List<Ocena>)query.getResultList();
 					
-					results.forEach(x -> lm.addElement(x));
+					results.forEach(x -> {
+						if(!lm.contains(x))
+							lm.addElement(x);
+					});
 				}catch(Exception exc) {}
 			}
 		});
