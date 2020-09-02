@@ -41,7 +41,7 @@ public class DbController<E> {
 		}
 		catch (Exception e) {
 		    e.printStackTrace();
-		    StandardServiceRegistryBuilder.destroy( registry );
+		    StandardServiceRegistryBuilder.destroy(registry);
 		}
 	}
 	
@@ -66,7 +66,6 @@ public class DbController<E> {
 	}
 	
 	@SuppressWarnings("unchecked")
-	
 	public List<E> load(String s){
 		session.beginTransaction();
 		List<E> tmpList = session.createQuery("from "+s).list();
